@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Laptop Shop{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    /* Style the carousel indicators */
+    #imageCarousel .carousel-indicators {
+        bottom: -10px;
+    }
+
+    /* Style the carousel items */
+    #imageCarousel .carousel-item {
+        height: 400px;
+        background-color: #777;
+    }
+
+    #imageCarousel .carousel-item img {
+        object-fit: full;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Style the logo */
+    .logo {
+        height: 30%px;
+        margin-right: ;
+    }
+</style>
+</head>
+
+<body>
+    {% block content %}
+
+    <div class="container">
+        <div class="header">
+            <img src="{% static 'img/lapcart.png' %}" alt="Your Logo" class="logo">
+            <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{% static 'img/apple.jpg' %}" alt="Apple Laptop">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'img/dell.jpg' %}" alt="Dell Laptop">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'img/hp.jpg' %}" alt="HP Laptop">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    {% endblock %}
+</body>
+
+</html>
