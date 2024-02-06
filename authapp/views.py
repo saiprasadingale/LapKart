@@ -5,6 +5,7 @@ from django.http import HttpResponse
 
 
 def register_view(request):
+    signup_form=UserCreationForm()
     if request.method == "POST":
         signup_form = UserCreationForm(request.POST)
         if signup_form.is_valid():
@@ -12,12 +13,12 @@ def register_view(request):
             return redirect('/seller/show/')
 
     template_name = 'authapp/register.html'
-    signup_form = UserCreationForm()
     context = {'signup_form': signup_form}
     return render(request, template_name, context)
 
 
 def login_view(request):
+    login_form = AuthenticationForm()
     if request.method == "POST":
         u = request.POST.get('username')
         p = request.POST.get('password')
@@ -28,7 +29,7 @@ def login_view(request):
         pass
 
     template_name = 'authapp/login.html'
-    login_form = AuthenticationForm()
+
     context = {'login_form': login_form}
     return render(request, template_name, context)
 

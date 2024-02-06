@@ -6,13 +6,13 @@ from .models import Laptop
 
 @login_required(login_url='/auth/login/')
 def add_laptop_view(request):
+    form= LaptopForm()
     if request.method == 'POST':
         form = LaptopForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('show_url')
-    else:
-        form = LaptopForm()
+
 
     template_name = 'SellerApp/add_laptop.html'
     context = {'form': form}
@@ -27,6 +27,7 @@ def show_laptop_view(request):
     return render(request, template_name, context)
 
 
+
 def update_laptop_view(request, id):
     lap_obj = Laptop.objects.get(id=id)
     if request.method == 'POST':
@@ -37,14 +38,13 @@ def update_laptop_view(request, id):
     else:
         form = LaptopForm(instance=lap_obj)
 
-    template_name = 'SellerApp/add_laptop.html'
+    template_name = 'SellerApp/update_laptop.html'  # Changed template name
     context = {'form': form}
     return render(request, template_name, context)
+
 
 
 def delete_laptop_view(request, id):
     lap_obj = Laptop.objects.get(id=id)
     lap_obj.delete()
     return redirect('show_url')
-
-
