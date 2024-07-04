@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .forms import LaptopForm
@@ -28,22 +28,20 @@ def show_laptop_view(request):
 
 
 
+
 def update_laptop_view(request, id):
-    lap_obj = Laptop.objects.get(id=id)
-    if request.method == 'POST':
-        form = LaptopForm(request.POST, instance=lap_obj)
+    laptop = get_object_or_404(Laptop, id=id)
+    if request.method == "POST":
+        form = LaptopForm(request.POST, instance=laptop)
         if form.is_valid():
             form.save()
-            return redirect('show_url')
+            return redirect('/seller/show/')
     else:
-        form = LaptopForm(instance=lap_obj)
+        form = LaptopForm(instance=laptop)
 
-    template_name = 'SellerApp/update_laptop.html'  # Changed template name
+    template_name = 'SellerApp/add_laptop.html'
     context = {'form': form}
     return render(request, template_name, context)
-
-
-
 def delete_laptop_view(request, id):
     lap_obj = Laptop.objects.get(id=id)
     lap_obj.delete()

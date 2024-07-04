@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     {% block title %}
-    <title>Show Laptop</title>
+    <title>Add Laptop</title>
     {% endblock %}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
           rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
@@ -17,34 +17,12 @@
 
 {% block content %}
 <div class="container mt-5">
-    <table class="table table-dark table-hover">
-        <thead>
-        <tr>
-            <th>COMPANY</th>
-            <th>MODEL</th>
-            <th>RAM</th>
-            <th>ROM</th>
-            <th>PRICE</th>
-            <th>ACTION</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for lap in laptop_objs %}
-        <tr>
-            <td>{{ lap.company }}</td>
-            <td>{{ lap.model_name }}</td>
-            <td>{{ lap.ram }}</td>
-            <td>{{ lap.rom }}</td>
-            <td>{{ lap.price }}</td>
-            <td>
-                <a href="{% url 'update_url' lap.id %}" class="btn btn-warning btn-sm">UPDATE</a>
-                <a href="{% url 'delete_url' lap.id %}" class="btn btn-danger btn-sm">DELETE</a>
-            </td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <a href="{% url 'add_url' %}" class="btn btn-primary">ADD LAPTOP</a>
+    <h2>Add New Laptop</h2>
+    <form method="post" action="{% url 'add_url' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Add Laptop</button>
+    </form>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
